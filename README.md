@@ -10,18 +10,27 @@
 #only two colors - red (P < 0.05) and black (P > 0.05) to show
 #only two line type - solid (P > 0.05) and dash (P < 0.05) to show
 
+#lmln()
 lmln <- function(y=yaxis,x=xaxis){
+  #use lm()
   lm <- lm(y~x)
+  #summary
   summ <- summary(lm)
-  p.value <- coef(summ)[2,4] # store P.value
-  AdjR2 <- summ$adj.r.squared # store Adj R-square
+  #store P.value
+  p.value <- coef(summ)[2,4] 
+  #store Adj R-square
+  AdjR2 <- summ$adj.r.squared 
+  #easy plot
   plot(y~x)
-  
-  a <- coef(lm)[1] # intercept
-  b <- coef(lm)[2] # slop
-  if(p.value<0.05){lty=1;col="red"}
+  #intercept
+  a <- coef(lm)[1] 
+  #slop
+  b <- coef(lm)[2] 
+  if(p.value<0.05){lty=1;col="red"};
   if(p.value>0.05){lty=2;col="black"}
+  #plot the line y~x
   abline(a=a,b=b,lty=lty)
+  #output the summary
   return(summ)
 }
 
